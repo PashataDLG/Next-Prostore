@@ -32,6 +32,11 @@ const Menu = () => {
                                 <ShoppingCart />
                             </Link>
                         </Button>
+                        <Button asChild>
+                            <Link href='/sign-in'>
+                                <UserIcon /> Sign In
+                            </Link>
+                        </Button>
                         <SheetDescription></SheetDescription>
                     </SheetContent>
                 </SheetTrigger>
