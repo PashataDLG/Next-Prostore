@@ -3,12 +3,20 @@ import { APP_NAME } from "@/lib/constants";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import CredentialsSignInForm from "./credentials-signin-form";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
     title: "Sign in",
 };
 
-const SignInPage = () => {
+const SignInPage = async () => {
+    const session = await auth();
+
+    if(session) {
+        redirect('/');
+    }
     return (
         <div className="w-full max-w-md mx-auto">
             <Card>
@@ -20,15 +28,15 @@ const SignInPage = () => {
                             height={100}
                             alt={`${APP_NAME} logo`}
                             priority={true}
-                        />
-                        <CardTitle className="text-center">Sign In</CardTitle>
-                        <CardDescription className="text-center">
+                        />                        
+                    </Link>
+                    <CardTitle className="text-center">Sign In</CardTitle>
+                    <CardDescription className="text-center">
                             Sign in to your account
                         </CardDescription>
-                    </Link>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                    {/* Form here */}
+                    <CredentialsSignInForm />
                 </CardContent>
             </Card>
         </div>
